@@ -1,0 +1,1 @@
+list(mubeta = 1, prec = 0.01, mutheta = 1, prec0 = 0.01)

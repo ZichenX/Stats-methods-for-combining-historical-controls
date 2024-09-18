@@ -1,0 +1,1 @@
+list(mu = 1, prec = 0.001, mu0 = 1, prec0 = 0.001)

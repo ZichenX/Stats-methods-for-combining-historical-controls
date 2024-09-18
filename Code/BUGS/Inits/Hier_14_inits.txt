@@ -1,0 +1,1 @@
+list(mutheta = 0, mubeta = 0, etatheta = 1, etabeta = 1)
