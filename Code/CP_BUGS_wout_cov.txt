@@ -1,0 +1,31 @@
+model{
+	# Historical likelihoods (For only one historical trial)
+		for (i in 1:n0) {
+			y0[i] ~ dbern(p0[i]);
+			logit(p0[i]) <- theta0 + beta0*x0[i];
+		}
+	# Current likelihoods
+		for (j in 1:n1) {
+			y1[j] ~ dbern(p1[j]);
+			logit(p1[j]) <- theta1 + beta1*x1[j];
+		}
+	# Commensurability(base on the study effect)
+		theta0 ~ dnorm(0, 0.001);
+		theta1 ~ dnorm(theta0, tau); 
+		
+	# Commensurable prior
+		t ~ dbern(p.choose);
+		slab ~ dunif(l.slab, u.slab);
+		tau <- (1-t)*spike + t*slab;
+			
+	# Now, we begin to specify the distribution of priors(treatment effect)
+		beta0 ~ dnorm(0, 0.001);
+		beta1 ~ dnorm(beta0, tau);
+}
+
+# Data
+
+
+# Initialization
+list(beta0=0, theta0=0)
+
