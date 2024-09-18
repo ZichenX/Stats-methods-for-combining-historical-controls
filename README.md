@@ -1,2 +1,4 @@
-This is my undergraduate thesis. \n
-If you like it, please let me know by clicking a star:)
+This is my undergraduate thesis.
+
+If you find it helpful or interesting, feel free to give it a star :)
+
