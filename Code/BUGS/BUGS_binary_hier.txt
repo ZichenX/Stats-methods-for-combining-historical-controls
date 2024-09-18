@@ -1,0 +1,39 @@
+model { 
+	for (i in 1:n0){
+	# numtrials is k, the number of different probabilities, showing how many trials there are.
+	# p1, p0 denote treatment and control group response rates respectively.
+
+	y0[i] ~ dbern(p0[i]);
+	logit(p0[i]) <- theta0 + beta0*x0[i];
+		
+	}
+	# fit BHM for each trial respectively and share their hyperpriors to "combine" the data.
+	
+	for (i in 1:n1){
+	y1[i] ~ dbern(p1[i]);
+	logit(p1[i]) <- theta1 + beta1*x1[i];
+	
+	}
+
+	# In each group, x is the number of responses and n is the number of patients
+	beta0 ~ dnorm(mubeta, taubeta);
+	beta1 ~ dnorm(mubeta, taubeta);
+	theta0 ~ dnorm(mutheta, tautheta);
+	theta1 ~ dnorm(mutheta, tautheta);
+	
+	taubeta <- 1/prec
+	tautheta <- 1/prec0
+	
+
+	#Priors
+	mubeta ~ dnorm(btmean.Mu, btprec.Mu)
+	mutheta ~ dnorm(thtmean.Mu, thtprec.Mu)
+	prec ~ dgamma(bttau.alpha, bttau.beta)
+	prec0 ~ dgamma(thttau.alpha, thttau.beta)
+	}
+
+# Example data
+
+
+# Example of initial values 
+list(mubeta = 1, taubeta = 0.1, mutheta = 1, tautheta = 0.1)
